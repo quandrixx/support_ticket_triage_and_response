@@ -1,0 +1,24 @@
+[
+  {
+    "id": "T03",
+    "subject": "How do I add teammates to my workspace?",
+    "text": "New to the platform - trying to figure out how to invite three coworkers to my workspace so we can collaborate on the same project. Couldn't find this in the settings menu.",
+    "name": "Devon Yates",
+    "email": "devon.yates@pinehollow-studio.example",
+    "job_title": "Creative Director",
+    "expected_category": "how_to",
+    "expected_urgency": 5,
+    "expected_human_review": false
+  },
+  {
+    "id": "T05",
+    "subject": "Unbelievable that this keeps happening",
+    "text": "This is the THIRD time this quarter your export feature has corrupted my data. I've lost hours of work. If this isn't fixed by end of day I'm cancelling our enterprise contract and telling everyone I know not to use this product.",
+    "name": "Robert Chen",
+    "email": "r.chen@vantagepoint-logistics.example",
+    "job_title": "VP of Supply Chain",
+    "expected_category": "bug",
+    "expected_urgency": 1,
+    "expected_human_review": true
+  }
+]

@@ -1,0 +1,167 @@
+[
+  {
+    "id": "T01",
+    "subject": "Dashboard won't load after latest update",
+    "text": "Since this morning's update, the analytics dashboard just spins and never loads. I've tried three different browsers and cleared my cache. Our whole team relies on this for the morning standup and we're flying blind right now.",
+    "name": "Priya Nandakumar",
+    "email": "priya.nandakumar@brightloop.example",
+    "job_title": "Operations Manager",
+    "expected_category": "bug",
+    "expected_urgency": 2,
+    "expected_human_review": false
+  },
+  {
+    "id": "T02",
+    "subject": "Duplicate charge on my account",
+    "text": "I was charged $249 twice on the 12th for my monthly subscription. I need this refunded immediately - I've already disputed one of the charges with my bank and I'd rather resolve it directly with you first.",
+    "name": "Marcus Whitfield",
+    "email": "m.whitfield@fernridge-consulting.example",
+    "job_title": "Managing Partner",
+    "expected_category": "billing",
+    "expected_urgency": 2,
+    "expected_human_review": true
+  },
+  {
+    "id": "T03",
+    "subject": "How do I add teammates to my workspace?",
+    "text": "New to the platform - trying to figure out how to invite three coworkers to my workspace so we can collaborate on the same project. Couldn't find this in the settings menu.",
+    "name": "Devon Yates",
+    "email": "devon.yates@pinehollow-studio.example",
+    "job_title": "Creative Director",
+    "expected_category": "how_to",
+    "expected_urgency": 5,
+    "expected_human_review": false
+  },
+  {
+    "id": "T04",
+    "subject": "Locked out after password reset",
+    "text": "I reset my password an hour ago and now I can't log in at all - it just says 'invalid credentials' no matter what I try. I have a client presentation in 20 minutes and need access to my files.",
+    "name": "Anita Kowalczyk",
+    "email": "anita.kowalczyk@summitpeak-realty.example",
+    "job_title": "Senior Account Executive",
+    "expected_category": "account",
+    "expected_urgency": 1,
+    "expected_human_review": false
+  },
+  {
+    "id": "T05",
+    "subject": "Unbelievable that this keeps happening",
+    "text": "This is the THIRD time this quarter your export feature has corrupted my data. I've lost hours of work. If this isn't fixed by end of day I'm cancelling our enterprise contract and telling everyone I know not to use this product.",
+    "name": "Robert Chen",
+    "email": "r.chen@vantagepoint-logistics.example",
+    "job_title": "VP of Supply Chain",
+    "expected_category": "bug",
+    "expected_urgency": 1,
+    "expected_human_review": true
+  },
+  {
+    "id": "T06",
+    "subject": "Question about annual vs monthly billing",
+    "text": "Can you tell me the price difference between paying monthly versus switching to an annual plan? Just trying to budget for next year before we renew.",
+    "name": "Sofia Alvarado",
+    "email": "sofia.alvarado@northstar-nonprofit.example",
+    "job_title": "Finance Director",
+    "expected_category": "billing",
+    "expected_urgency": 5,
+    "expected_human_review": false
+  },
+  {
+    "id": "T07",
+    "subject": "Feature request: dark mode",
+    "text": "Would love to see a dark mode option added to the app - staring at the bright white interface for 8 hours a day is rough on the eyes. Not urgent, just a nice-to-have.",
+    "name": "Jamal Okafor",
+    "email": "jamal.okafor@redcedar-media.example",
+    "job_title": "Video Editor",
+    "expected_category": "other",
+    "expected_urgency": 5,
+    "expected_human_review": false
+  },
+  {
+    "id": "T08",
+    "subject": "API returning 500 errors intermittently",
+    "text": "Our integration has started throwing 500 errors on roughly 1 in 10 calls to the /reports endpoint over the last two days. Nothing changed on our end. Happy to share request IDs and logs if that helps track it down.",
+    "name": "Elena Sokolova",
+    "email": "elena.sokolova@ironwood-fintech.example",
+    "job_title": "Backend Engineer",
+    "expected_category": "bug",
+    "expected_urgency": 3,
+    "expected_human_review": false
+  },
+  {
+    "id": "T09",
+    "subject": "Need to speak with legal about our data processing agreement",
+    "text": "Our compliance team flagged a clause in the DPA that needs to be reviewed before we can renew. Please connect me with someone who can discuss contract terms directly.",
+    "name": "Thomas Reyes",
+    "email": "t.reyes@harborline-insurance.example",
+    "job_title": "Chief Compliance Officer",
+    "expected_category": "other",
+    "expected_urgency": 3,
+    "expected_human_review": true
+  },
+  {
+    "id": "T10",
+    "subject": "Can't remember how to export to CSV",
+    "text": "I know I've done this before but I can't find the export button anywhere on the reports page. Could you point me in the right direction?",
+    "name": "Grace Lindqvist",
+    "email": "grace.lindqvist@willowbrook-clinic.example",
+    "job_title": "Practice Administrator",
+    "expected_category": "how_to",
+    "expected_urgency": 5,
+    "expected_human_review": false
+  },
+  {
+    "id": "T11",
+    "subject": "Account suspended without warning",
+    "text": "I logged in this morning and got a message saying my account is suspended pending review. No email, no explanation. I have payroll to run today and this is causing a real problem for my team.",
+    "name": "Deborah Osei",
+    "email": "deborah.osei@claremontfields-hr.example",
+    "job_title": "HR Director",
+    "expected_category": "account",
+    "expected_urgency": 1,
+    "expected_human_review": true
+  },
+  {
+    "id": "T12",
+    "subject": "Mobile app crashes on photo upload",
+    "text": "Every time I try to attach a photo to a ticket from the mobile app it crashes immediately. Works fine on desktop. Running the latest iOS version on an iPhone 15.",
+    "name": "Kenji Watanabe",
+    "email": "kenji.watanabe@bluepine-construction.example",
+    "job_title": "Site Supervisor",
+    "expected_category": "bug",
+    "expected_urgency": 4,
+    "expected_human_review": false
+  },
+  {
+    "id": "T13",
+    "subject": "Requesting refund for unused seats",
+    "text": "We downsized last month and are now only using 8 of the 20 seats we're paying for. I'd like to discuss a partial refund or credit for the unused licenses going forward.",
+    "name": "Natalie Fournier",
+    "email": "natalie.fournier@graystone-architects.example",
+    "job_title": "Office Manager",
+    "expected_category": "billing",
+    "expected_urgency": 4,
+    "expected_human_review": true
+  },
+  {
+    "id": "T14",
+    "subject": "How to set up SSO with Okta",
+    "text": "Our IT team wants to roll out single sign-on through Okta for all employees using the platform. Is there documentation on how to configure this, or do we need to work with someone on your side?",
+    "name": "Victor Ibrahim",
+    "email": "victor.ibrahim@cascadeworks-tech.example",
+    "job_title": "IT Systems Administrator",
+    "expected_category": "how_to",
+    "expected_urgency": 4,
+    "expected_human_review": false
+  },
+  {
+    "id": "T15",
+    "subject": "Two-factor authentication codes never arrive",
+    "text": "I've tried logging in five times today and the SMS verification code never shows up. Checked spam, checked my carrier, nothing. I'm completely locked out of an account I need for work.",
+    "name": "Lauren Petrova",
+    "email": "lauren.petrova@maplecrest-dental.example",
+    "job_title": "Office Coordinator",
+    "expected_category": "account",
+    "expected_urgency": 2,
+    "expected_human_review": false
+  }
+]

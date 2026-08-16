@@ -1,0 +1,28 @@
+{
+  "name": "Triage Crew",
+  "agents": ["ticket_classifier"],
+  "tasks": [
+    {
+      "name": "categorize_task",
+      "description": "Read the following support ticket and assign it a single category: bug, billing, how_to, account, or other.\n\nTicket:\n{ticket_text}",
+      "expected_output": "The ticket's category.",
+      "agent": "ticket_classifier"
+    },
+    {
+      "name": "urgency_task",
+      "description": "Assess the urgency of the following support ticket on a scale of 1 (highest priority) to 5 (lowest), based on tone, wording, and business impact.\n\nTicket:\n{ticket_text}",
+      "expected_output": "An urgency score from 1-5 with brief reasoning.",
+      "agent": "ticket_classifier",
+      "context": ["categorize_task"]
+    },
+    {
+      "name": "human_review_task",
+      "description": "Decide whether the following ticket requires human review before an automated response is sent — e.g. it mentions a refund, a legal or contractual issue, account suspension, or the customer is clearly upset or threatening to leave.\n\nTicket:\n{ticket_text}",
+      "expected_output": "A structured triage result combining category, urgency, and whether human review is required.",
+      "agent": "ticket_classifier",
+      "context": ["categorize_task", "urgency_task"],
+      "output_pydantic": { "python": "models.TriageResult" }
+    }
+  ],
+  "process": "sequential"
+}

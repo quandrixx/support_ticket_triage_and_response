@@ -1,0 +1,23 @@
+[project]
+name = "support_ticket_triage_and_response"
+version = "0.1.0"
+description = "support_ticket_triage_and_response using crewAI"
+authors = [{ name = "Trinity Green", email = "trinity@youknowmyemail.org" }]
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "crewai[anthropic,tools]>=1.15.16,<2.0.0",
+]
+
+[project.scripts]
+kickoff = "support_ticket_triage_and_response.main:kickoff"
+run_crew = "support_ticket_triage_and_response.main:kickoff"
+plot = "support_ticket_triage_and_response.main:plot"
+run_with_trigger = "support_ticket_triage_and_response.main:run_with_trigger"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "flow"
+project_id = "15a473ea-2c57-40f8-98a7-9cfa4b5f3d8a"
