@@ -32,7 +32,7 @@ def _print_summary(rows: list[tuple[dict, TicketState]]) -> None:
     """Print an expected-vs-actual table across all processed tickets."""
     header = (
         f"{'ID':<5} {'category (exp/got)':<26} "
-        f"{'urg':<8} {'human (exp/got)':<18} {'status':<12}"
+        f"{'urg':<8} {'human (exp/got)':<18} {'status':<12} {'KB cited':<20}"
     )
     print("\n" + header)
     print("-" * len(header))
@@ -49,12 +49,15 @@ def _print_summary(rows: list[tuple[dict, TicketState]]) -> None:
         cat_flag = "✓" if got_cat == exp_cat else "✗"
         human_flag = "✓" if got_human.lower() == exp_human.lower() else "✗"
 
+        kb_cited = ", ".join(state.draft.cited_kb_articles) if state.draft else "-"
+
         print(
             f"{ticket.get('id', '?'):<5} "
             f"{f'{exp_cat}/{got_cat} {cat_flag}':<26} "
             f"{f'{exp_urg}/{got_urg}':<8} "
             f"{f'{exp_human}/{got_human} {human_flag}':<18} "
-            f"{state.final_status.value:<12}"
+            f"{state.final_status.value:<12} "
+            f"{kb_cited or '-':<20}"
         )
 
 
