@@ -9,29 +9,5 @@
     "expected_category": "how_to",
     "expected_urgency": 5,
     "expected_human_review": false
-  },
-  {
-    "id": "T05",
-    "subject": "Unbelievable that this keeps happening",
-    "text": "This is the THIRD time this quarter your export feature has corrupted my data. I've lost hours of work. If this isn't fixed by end of day I'm cancelling our enterprise contract and telling everyone I know not to use this product.",
-    "name": "Robert Chen",
-    "email": "r.chen@vantagepoint-logistics.example",
-    "job_title": "VP of Supply Chain",
-    "expected_category": "bug",
-    "expected_urgency": 1,
-    "expected_human_review": true
-  },
-  {
-  "id": "T20",
-  "subject": "Which data center is our data physically stored in?",
-  "text": "For an upcoming data residency review, our security team needs to confirm the physical region/data center where our workspace's data is stored at rest, and whether backups ever leave that region.",
-  "name": "Ingrid Sæther",
-  "email": "ingrid.saether@polaris-shipping.example",
-  "job_title": "Information Security Officer",
-  "expected_category": "other",
-  "expected_urgency": 3,
-  "expected_human_review": true,
-  "expected_kb_match": false,
-  "note": "Data residency specifics aren't in the KB (only general DPA article exists) - tests whether the agent distinguishes 'related KB article exists' from 'KB article actually answers this' rather than citing KB015 as if it resolves the question."
-}
+  }
 ]

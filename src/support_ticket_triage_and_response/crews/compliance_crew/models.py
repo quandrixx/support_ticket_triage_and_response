@@ -6,6 +6,6 @@ shared models are re-exported here. Keep the definitions in
 ``support_ticket_triage_and_response.models``; this file only forwards them.
 """
 
-from support_ticket_triage_and_response.models import DraftResponse
+from support_ticket_triage_and_response.models import ComplianceCheck
 
-__all__ = ["DraftResponse"]
+__all__ = ["ComplianceCheck"]

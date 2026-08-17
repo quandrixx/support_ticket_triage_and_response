@@ -1,6 +1,6 @@
 {
   "name": "Response Crew",
-  "agents": ["specialist", "compliance_checker"],
+  "agents": ["specialist"],
   "tasks": [
     {
       "name": "draft_response_task",
@@ -8,14 +8,6 @@
       "expected_output": "A structured draft response which includes the text body of the response sent to the user, the confidence that this will fully resolve the issue, and any cited knowledge base articles.",
       "agent": "specialist",
       "output_pydantic": { "python": "models.DraftResponse"}
-    },
-    {
-      "name": "compliance_check_task",
-      "description": "Check the draft response for any policy or tone violations before it is sent to the customer. The original ticket is provided for context.\n\nTicket:\n{ticket_text}",
-      "expected_output": "A structured compliance check which indicates if the compliance check passed or not, lists any issues if found, and a revised body if the original needed correction.",
-      "agent": "compliance_checker",
-      "context": ["draft_response_task"],
-      "output_pydantic": { "python": "models.ComplianceCheck" }
     }
   ],
   "process": "sequential"

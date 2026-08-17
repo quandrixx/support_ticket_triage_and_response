@@ -33,4 +33,5 @@ class TicketState(BaseModel):
     triage: TriageResult | None = Field(default=None, description="Result of the triage agent")
     draft: DraftResponse | None = Field(default=None, description="Result of the specialist agent")
     compliance: ComplianceCheck | None = Field(default=None, description="Result of the compliance check agent")
+    compliance_attempts: int = Field(default=0, description="How many times the draft has been revised and re-checked for compliance")
     final_status: TicketStatus = Field(default=TicketStatus.NEEDS_REVIEW, description="The ticket's status once it exits the flow")

@@ -1,0 +1,14 @@
+{
+  "name": "Compliance Crew",
+  "agents": ["compliance_checker"],
+  "tasks": [
+    {
+      "name": "compliance_check_task",
+      "description": "Check the following draft support response for policy or tone violations before it is sent to the customer.\n\nYou MUST call the policy_check tool, passing the exact draft body below, and treat its findings as authoritative. Set passed=false if it reports any violation. List every reported violation in the issues field. If the issues can be safely corrected (e.g. remove a refund promise, redact PII, add the missing disclaimer, remove profanity), rewrite the draft and return the fully corrected version in revised_body. Only leave revised_body null when the issues cannot be safely auto-corrected and the ticket must go to a human.\n\nDraft response:\n{draft_body}\n\nOriginal ticket (for context):\n{ticket_text}",
+      "expected_output": "A structured compliance check indicating whether it passed, listing any issues found, and providing a corrected revised body when the draft needed correction.",
+      "agent": "compliance_checker",
+      "output_pydantic": { "python": "models.ComplianceCheck" }
+    }
+  ],
+  "process": "sequential"
+}

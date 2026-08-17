@@ -1,5 +1,8 @@
-from crewai.flow.flow import Flow, listen, router, start
+from crewai.flow.flow import Flow, listen, or_, router, start
 
+from support_ticket_triage_and_response.crews.compliance_crew.compliance_crew import (
+    kickoff_compliance_crew,
+)
 from support_ticket_triage_and_response.crews.response_crew.response_crew import (
     kickoff_response_crew,
 )
@@ -8,13 +11,18 @@ from support_ticket_triage_and_response.crews.triage_crew.triage_crew import (
 )
 from support_ticket_triage_and_response.models import TicketState, TicketStatus
 
+# Cap the revise -> recheck loop so a draft that can't be made compliant
+# eventually escalates to a human instead of looping forever.
+MAX_COMPLIANCE_ATTEMPTS = 2
+
 
 class SupportTicketFlow(Flow[TicketState]):
     """Triage an incoming support ticket and draft an initial response.
 
     Pipeline:
         triage -> (auto_respond | needs_human)
-        auto_respond -> draft + compliance -> (send | needs_human)
+        auto_respond -> draft -> check_compliance
+        check_compliance -> (send | revise_and_recheck -> check_compliance | needs_human)
     """
 
     @start()
@@ -32,7 +40,7 @@ class SupportTicketFlow(Flow[TicketState]):
 
     @listen("auto_respond")
     def draft_response(self):
-        """Draft a reply and run it through the compliance check."""
+        """Draft a reply grounded in the knowledge base."""
         result = kickoff_response_crew(
             {
                 "ticket_text": self.state.ticket_text,
@@ -40,17 +48,46 @@ class SupportTicketFlow(Flow[TicketState]):
                 "triage_summary": self.state.triage.summary,
             }
         )
-        # The response crew runs draft_response_task then compliance_check_task,
-        # so the crew's final output is the compliance check and the first task
-        # output is the draft.
-        self.state.compliance = result.pydantic
-        self.state.draft = result.tasks_output[0].pydantic
+        self.state.draft = result.pydantic
 
-    @router(draft_response)
-    def route_after_draft(self):
-        """Only auto-send a draft that cleared compliance."""
-        if self.state.compliance is not None and self.state.compliance.passed:
+    @listen(or_(draft_response, "revise_and_recheck"))
+    def check_compliance(self):
+        """Run the deterministic policy/compliance check against the current draft.
+
+        Re-runs on every revision so ``compliance.passed`` always reflects the
+        draft that would actually be sent.
+        """
+        result = kickoff_compliance_crew(
+            {
+                "ticket_text": self.state.ticket_text,
+                "draft_body": self.state.draft.body,
+            }
+        )
+        self.state.compliance = result.pydantic
+
+    @router(check_compliance)
+    def route_after_compliance(self):
+        """Send a clean draft; apply a correction and re-check; else escalate."""
+        compliance = self.state.compliance
+        if compliance is None:
+            return "needs_human"
+
+        if compliance.passed:
+            # Adopt the corrected text if the checker cleaned it up on this pass.
+            if compliance.revised_body:
+                self.state.draft.body = compliance.revised_body
             return "send"
+
+        # Not passed: if the checker supplied a correction and we still have
+        # retries left, apply it and re-run the check on the revised draft.
+        if (
+            compliance.revised_body
+            and self.state.compliance_attempts < MAX_COMPLIANCE_ATTEMPTS
+        ):
+            self.state.draft.body = compliance.revised_body
+            self.state.compliance_attempts += 1
+            return "revise_and_recheck"
+
         return "needs_human"
 
     @listen("send")

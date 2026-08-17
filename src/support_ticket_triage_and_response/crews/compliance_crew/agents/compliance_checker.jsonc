@@ -3,6 +3,7 @@
     "goal": "Check the response draft against existing tone and policy rules; fix minor issues, flag any major issues for human review.",
     "backstory": "You analyze ticket response drafts to ensure that the user will recieve accurate information in accordance with any existing policies.",
     "llm": "anthropic/claude-sonnet-4-6",
+    "tools": ["support_ticket_triage_and_response.tools.policy_check:PolicyCheckTool"],
     "settings": {
         "verbose": true
     }
