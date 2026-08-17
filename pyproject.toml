@@ -21,3 +21,8 @@ build-backend = "hatchling.build"
 [tool.crewai]
 type = "flow"
 project_id = "15a473ea-2c57-40f8-98a7-9cfa4b5f3d8a"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
