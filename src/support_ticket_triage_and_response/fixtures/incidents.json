@@ -1,0 +1,38 @@
+[
+  {
+    "id": "INC-501",
+    "title": "Analytics dashboard slow / not loading after v3.11.0 deploy",
+    "status": "active",
+    "severity": "SEV2",
+    "component": "analytics-dashboard",
+    "summary": "Deploy v3.11.0 shipped an un-indexed aggregation query that saturates the reporting DB pool; dashboards spin and time out. Mitigation: rollback in progress.",
+    "tags": ["dashboard", "deploy", "v3.11.0", "timeout", "database", "slow query"]
+  },
+  {
+    "id": "INC-502",
+    "title": "Duplicate subscription charges on Aug 12",
+    "status": "resolved",
+    "severity": "SEV3",
+    "component": "billing-service",
+    "summary": "Payment gateway ack delays triggered retry logic that double-charged some subscriptions on the 12th. Automated refunds queued; refunds require human approval before send.",
+    "tags": ["billing", "duplicate charge", "subscription", "payment gateway", "refund"]
+  },
+  {
+    "id": "INC-503",
+    "title": "Login failures for accounts after password reset",
+    "status": "monitoring",
+    "severity": "SEV3",
+    "component": "auth-service",
+    "summary": "Stale session tokens cached after password reset cause 'invalid credentials' for up to 15 minutes. Cache TTL fix deployed; monitoring.",
+    "tags": ["login", "auth", "password reset", "invalid credentials", "session", "locked out"]
+  },
+  {
+    "id": "INC-504",
+    "title": "Webhook deliveries failing with 401 for tenant after secret rotation",
+    "status": "resolved",
+    "severity": "SEV4",
+    "component": "webhooks-service",
+    "summary": "After a customer rotated their signing secret, cached credentials caused 401s until propagation. Resolved by cache invalidation.",
+    "tags": ["webhook", "integration", "signing secret", "401", "delivery failure"]
+  }
+]

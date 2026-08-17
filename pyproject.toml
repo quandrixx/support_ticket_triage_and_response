@@ -6,6 +6,7 @@ authors = [{ name = "Trinity Green", email = "trinity@youknowmyemail.org" }]
 requires-python = ">=3.10,<3.14"
 dependencies = [
     "crewai[anthropic,tools]>=1.15.16,<2.0.0",
+    "slack-bolt>=1.18,<2.0.0",
 ]
 
 [project.scripts]
@@ -13,6 +14,8 @@ kickoff = "support_ticket_triage_and_response.main:kickoff"
 run_crew = "support_ticket_triage_and_response.main:kickoff"
 plot = "support_ticket_triage_and_response.main:plot"
 run_with_trigger = "support_ticket_triage_and_response.main:run_with_trigger"
+run_slack = "support_ticket_triage_and_response.main:run_slack"
+on_ticket_created = "support_ticket_triage_and_response.main:on_ticket_created"
 
 [build-system]
 requires = ["hatchling"]

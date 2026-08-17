@@ -1,0 +1,42 @@
+[
+  {
+    "id": "MET-2001",
+    "service": "analytics-dashboard",
+    "metric": "p95_render_latency_ms",
+    "timestamp": "2026-08-16T08:15:00Z",
+    "summary": "p95 dashboard render latency jumped from 1.4s to 28s starting 08:05, right after deploy v3.11.0",
+    "tags": ["dashboard", "latency", "deploy", "v3.11.0", "regression"]
+  },
+  {
+    "id": "MET-2002",
+    "service": "analytics-dashboard",
+    "metric": "db_connection_pool_saturation",
+    "timestamp": "2026-08-16T08:14:00Z",
+    "summary": "Reporting DB connection pool at 100% saturation; queries queueing behind long-running aggregations",
+    "tags": ["dashboard", "database", "connection pool", "saturation", "slow query"]
+  },
+  {
+    "id": "MET-2003",
+    "service": "auth-service",
+    "metric": "login_error_rate",
+    "timestamp": "2026-08-16T07:45:00Z",
+    "summary": "Login error rate at 3%, isolated to accounts that reset passwords in the last hour",
+    "tags": ["login", "auth", "password reset", "error rate", "session"]
+  },
+  {
+    "id": "MET-2004",
+    "service": "billing-service",
+    "metric": "duplicate_charge_count",
+    "timestamp": "2026-08-12T15:00:00Z",
+    "summary": "17 duplicate subscription charges on the 12th correlated with a payment gateway ack timeout",
+    "tags": ["billing", "duplicate charge", "subscription", "payment gateway", "timeout"]
+  },
+  {
+    "id": "MET-2005",
+    "service": "webhooks-service",
+    "metric": "webhook_delivery_success_rate",
+    "timestamp": "2026-08-15T19:10:00Z",
+    "summary": "Webhook delivery success rate for one tenant dropped to 0% after a signing-secret rotation",
+    "tags": ["webhook", "integration", "delivery", "signing secret", "401"]
+  }
+]

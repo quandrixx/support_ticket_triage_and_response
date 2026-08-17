@@ -1,0 +1,50 @@
+[
+  {
+    "id": "LOG-1001",
+    "service": "analytics-dashboard",
+    "level": "error",
+    "timestamp": "2026-08-16T08:12:44Z",
+    "message": "Dashboard render timeout: aggregation query exceeded 30s and was cancelled",
+    "tags": ["dashboard", "timeout", "spinner", "aggregation", "slow query"]
+  },
+  {
+    "id": "LOG-1002",
+    "service": "analytics-dashboard",
+    "level": "warn",
+    "timestamp": "2026-08-16T08:10:02Z",
+    "message": "Widget cache miss rate spiked to 94% after deploy v3.11.0",
+    "tags": ["dashboard", "cache", "deploy", "v3.11.0", "load"]
+  },
+  {
+    "id": "LOG-1003",
+    "service": "auth-service",
+    "level": "error",
+    "timestamp": "2026-08-16T07:41:19Z",
+    "message": "Login rejected: invalid credentials after password reset, stale session token in cache",
+    "tags": ["login", "password reset", "invalid credentials", "session", "auth", "locked out"]
+  },
+  {
+    "id": "LOG-1004",
+    "service": "billing-service",
+    "level": "error",
+    "timestamp": "2026-08-12T14:22:07Z",
+    "message": "Duplicate subscription charge detected: retry fired after gateway ack was delayed",
+    "tags": ["billing", "duplicate charge", "double billing", "subscription", "payment gateway"]
+  },
+  {
+    "id": "LOG-1005",
+    "service": "webhooks-service",
+    "level": "error",
+    "timestamp": "2026-08-15T19:03:51Z",
+    "message": "Outbound webhook delivery failing with 401 after customer rotated signing secret",
+    "tags": ["webhook", "integration", "401", "signing secret", "delivery failure"]
+  },
+  {
+    "id": "LOG-1006",
+    "service": "api-gateway",
+    "level": "warn",
+    "timestamp": "2026-08-16T08:11:30Z",
+    "message": "Elevated 5xx rate on /v1/reports endpoint, upstream analytics-dashboard degraded",
+    "tags": ["api", "5xx", "reports", "latency", "degraded"]
+  }
+]

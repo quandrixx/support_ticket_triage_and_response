@@ -1,0 +1,14 @@
+{
+  "name": "Intake Crew",
+  "agents": ["intake_investigator"],
+  "tasks": [
+    {
+      "name": "clarifying_questions_task",
+      "description": "Read the following support ticket and produce a short list of clarifying questions to ask the customer in a single Slack round-trip.\n\nAsk only what is genuinely needed to investigate — typically: when the problem started, what changed just before, the exact error message or screenshot, the affected account/workspace/environment, how many users are impacted, and concrete reproduction steps. Ask at most 5 questions. Do NOT ask for anything the ticket already answers. Phrase each question so it can be answered in one message.\n\nTicket:\n{ticket_text}",
+      "expected_output": "A structured list of at most 5 targeted clarifying questions for the customer.",
+      "agent": "intake_investigator",
+      "output_pydantic": { "python": "models.ClarifyingQuestions" }
+    }
+  ],
+  "process": "sequential"
+}

@@ -1,0 +1,22 @@
+{
+  "name": "Investigation Crew",
+  "agents": ["production_investigator", "diagnostic_engineer"],
+  "tasks": [
+    {
+      "name": "build_dossier_task",
+      "description": "Investigate the following support ticket and build an internal dossier for the support engineers.\n\nYou MUST gather the current state of production before writing the dossier. Call the tools available to you — log_search, metrics_lookup, incident_lookup, past_tickets_lookup, and past_slack_lookup — using keywords from the ticket and the customer's added details (mention the affected feature/service, e.g. 'dashboard', 'login', 'billing', 'webhook'). Base every field only on what the ticket, the customer details, and the tool results actually say; do not invent logs, incidents, or components.\n\nProduce a dossier with: customer_summary, issue_summary, collected_details (what the customer added in the thread), environment (log_findings, metric_findings, related_tickets, related_slack_threads, incidents — each a list of short summaries drawn from the tools), a timeline of relevant events, and affected_components.\n\nTicket:\n{ticket_text}\n\nTriage summary:\n{triage_summary}\n\nAdditional details the customer provided:\n{customer_details}",
+      "expected_output": "A structured Dossier grounded in the tool results, with the environment section populated from logs, metrics, incidents, prior tickets, and prior Slack threads.",
+      "agent": "production_investigator",
+      "output_pydantic": { "python": "models.Dossier" }
+    },
+    {
+      "name": "differential_diagnosis_task",
+      "description": "Using the dossier produced in the previous step, produce a differential diagnosis to help the support engineers.\n\nEnumerate the most plausible root causes as ranked hypotheses. For each hypothesis give: the cause, a likelihood between 0 and 1, the specific evidence from the dossier that supports it, and a concrete recommended_action an engineer should take to confirm or resolve it. Order hypotheses from most to least likely and set top_recommendation to the single most important next step. Only cite evidence that appears in the dossier; if the evidence is thin, say so and lower the likelihood.\n\nOriginal ticket (for reference):\n{ticket_text}",
+      "expected_output": "A structured DifferentialDiagnosis with ranked hypotheses (cause, likelihood, evidence, recommended_action) and a top_recommendation.",
+      "agent": "diagnostic_engineer",
+      "context": ["build_dossier_task"],
+      "output_pydantic": { "python": "models.DifferentialDiagnosis" }
+    }
+  ],
+  "process": "sequential"
+}

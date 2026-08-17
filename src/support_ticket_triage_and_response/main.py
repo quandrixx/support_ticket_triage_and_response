@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -47,6 +48,45 @@ def run_with_trigger():
     flow = SupportTicketFlow()
     flow.kickoff(inputs={"ticket_text": ticket_text})
     print(f"Final status: {flow.state.final_status.value}")
+
+
+def run_slack():
+    """Launch the Slack (Socket Mode) listener for the investigation flow.
+
+    Requires SLACK_BOT_TOKEN, SLACK_APP_TOKEN, SLACK_ENGINEER_CHANNEL, and
+    (optionally) SLACK_CUSTOMER_CHANNEL in the environment.
+    """
+    from support_ticket_triage_and_response.integrations.slack_app import run
+
+    run()
+
+
+def on_ticket_created():
+    """Fire the investigation on a new ticket by opening a Slack thread.
+
+    Accepts a JSON ticket payload as the first CLI argument (same shape as
+    ``run_with_trigger``) and posts the clarifying questions to the customer
+    channel; the customer's reply resumes the flow via the running Slack app.
+    """
+    from slack_sdk import WebClient
+
+    from support_ticket_triage_and_response.integrations.slack_app import (
+        PendingInvestigationStore,
+        start_investigation,
+    )
+
+    payload = json.loads(sys.argv[1]) if len(sys.argv) > 1 else {}
+    ticket_text = payload.get("ticket_text") or _build_ticket_text(payload)
+
+    client = WebClient(token=os.environ["SLACK_BOT_TOKEN"])
+    store = PendingInvestigationStore(os.environ.get("SLACK_PENDING_STORE"))
+    thread_ts = start_investigation(
+        ticket_text,
+        client=client,
+        channel=os.environ["SLACK_CUSTOMER_CHANNEL"],
+        store=store,
+    )
+    print(f"Opened investigation thread {thread_ts}")
 
 
 def plot():

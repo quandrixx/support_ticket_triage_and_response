@@ -1,0 +1,34 @@
+[
+  {
+    "id": "SL-9001",
+    "channel": "#prod-incidents",
+    "title": "Dashboard timeouts after deploy",
+    "summary": "Engineers traced earlier dashboard timeouts to an un-indexed reporting query introduced in a deploy; rolling back restored render times.",
+    "resolution": "Rolled back the deploy and added a covering index on the reporting table.",
+    "tags": ["dashboard", "timeout", "deploy", "database", "index", "rollback"]
+  },
+  {
+    "id": "SL-9002",
+    "channel": "#billing-ops",
+    "title": "Duplicate charge retries",
+    "summary": "Thread discussing gateway ack timeouts causing duplicate subscription charges and how refunds are approved.",
+    "resolution": "Added idempotency keys to charge retries; refunds handled manually with approval.",
+    "tags": ["billing", "duplicate charge", "payment gateway", "idempotency", "refund"]
+  },
+  {
+    "id": "SL-9003",
+    "channel": "#auth",
+    "title": "Invalid credentials right after password reset",
+    "summary": "Support flagged users locked out immediately after resetting their password; root-caused to cached session tokens.",
+    "resolution": "Lowered session-cache TTL and added cache invalidation on password reset.",
+    "tags": ["login", "password reset", "invalid credentials", "session", "auth", "locked out"]
+  },
+  {
+    "id": "SL-9004",
+    "channel": "#integrations",
+    "title": "Webhook 401s after rotating secret",
+    "summary": "Customer rotated their webhook signing secret and deliveries began failing with 401 until cached credentials expired.",
+    "resolution": "Documented that secret rotation needs a cache invalidation; added a self-serve 'test webhook' button.",
+    "tags": ["webhook", "integration", "signing secret", "401", "delivery failure"]
+  }
+]

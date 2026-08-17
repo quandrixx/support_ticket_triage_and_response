@@ -83,6 +83,68 @@ To run a single ticket via the deployment trigger entry point:
 uv run run_with_trigger '{"subject": "Duplicate charge", "text": "I was charged twice this month."}'
 ```
 
+## Slack Investigation Flow
+
+For hard tickets that need real investigation there is a second, Slack-invokable
+pipeline, [`InvestigationFlow`](src/support_ticket_triage_and_response/flows/investigation_flow.py).
+It can be triggered two ways — a `/triage` slash command (or an @mention) in
+Slack, **or** a new-ticket event via `on_ticket_created` — and both converge on
+the same single round-trip:
+
+```mermaid
+flowchart TD
+    S[/triage command · @mention · new ticket/] --> Q[Intake Crew<br/>generate clarifying questions]
+    Q --> TH[Post questions to a Slack thread<br/>register pending by thread_ts]
+    TH -. customer replies once .-> INV[InvestigationFlow]
+    INV --> TRI[Triage Crew]
+    TRI --> DOS[Investigation Crew<br/>env context → Dossier]
+    DOS --> DX[Investigation Crew<br/>Differential Diagnosis]
+    DX --> DRAFT[Response Crew<br/>KB-grounded reply]
+    DRAFT --> SAN[Compliance Crew<br/>policy_check sanitize]
+    SAN --> CUST([Sanitized reply → customer thread])
+    SAN --> ENG([Dossier + diagnosis → engineer channel])
+```
+
+The customer's clarifying reply is awaited by the **Slack event loop**, not
+inside the flow — the flow stays synchronous. The "production systems" are
+mocked with the same deterministic keyword-overlap style as `kb_lookup`: the
+**Production Investigator** agent gathers current state from five fixture-backed
+tools —
+[`log_search`](src/support_ticket_triage_and_response/tools/log_search.py),
+[`metrics_lookup`](src/support_ticket_triage_and_response/tools/metrics_lookup.py),
+[`incident_lookup`](src/support_ticket_triage_and_response/tools/incident_lookup.py),
+[`past_tickets_lookup`](src/support_ticket_triage_and_response/tools/past_tickets_lookup.py),
+and [`past_slack_lookup`](src/support_ticket_triage_and_response/tools/past_slack_lookup.py)
+(fixtures live under [`fixtures/`](src/support_ticket_triage_and_response/fixtures/)).
+The engineer channel receives the full dossier + differential diagnosis; the
+customer thread receives only the reply after it passes the same `policy_check`
+sanitization used by the main flow.
+
+Slack is **real** (Bolt / Socket Mode). Add these to `.env` and create a Slack
+app with a `/triage` slash command, the `app_mention` and `message.channels`
+event subscriptions, and Socket Mode enabled:
+
+```bash
+SLACK_BOT_TOKEN=xoxb-...        # bot token (chat:write, commands, app_mentions:read)
+SLACK_APP_TOKEN=xapp-...        # app-level token for Socket Mode (connections:write)
+SLACK_CUSTOMER_CHANNEL=C0123... # channel new-ticket threads open in
+SLACK_ENGINEER_CHANNEL=C0456... # channel the dossier + diagnosis is posted to
+# SLACK_PENDING_STORE=/path/pending.json  # optional: persist in-flight threads across restarts
+```
+
+Run the listener, then use `/triage <describe the issue>` in the customer
+channel and reply once in the thread:
+
+```bash
+uv run run_slack
+```
+
+Fire the same pipeline from a new-ticket event (posts the questions and returns):
+
+```bash
+uv run on_ticket_created '{"subject": "Dashboard won'\''t load", "text": "It just spins since this morning'\''s update."}'
+```
+
 ## Testing
 
 ```bash
@@ -96,6 +158,9 @@ the flow tests mock the crew kickoffs with canned result objects.
 |---|---|
 | [`tests/test_tools.py`](tests/test_tools.py) | `kb_lookup` (search, category filter, limits, no-match) and `policy_check` (refund/profanity/PII/disclaimer rules, Luhn validation, masking) |
 | [`tests/test_flow_routing.py`](tests/test_flow_routing.py) | `SupportTicketFlow` routing — triage gate, auto-send, the revise→recheck loop, the attempt cap, and escalation paths |
+| [`tests/test_env_tools.py`](tests/test_env_tools.py) | The shared fixture search and the five investigation context tools (log/metrics/incident/prior-ticket/prior-Slack lookup) |
+| [`tests/test_investigation_flow.py`](tests/test_investigation_flow.py) | `InvestigationFlow` wiring — dossier/diagnosis extraction, and sanitization of the customer reply |
+| [`tests/test_slack_handlers.py`](tests/test_slack_handlers.py) | Slack pure logic — pending-thread store, question formatting, Phase-1 posting, and Phase-2 dossier/reply posting |
 
 ## Observability
 
