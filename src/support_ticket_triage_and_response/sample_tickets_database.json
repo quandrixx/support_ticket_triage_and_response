@@ -163,5 +163,70 @@
     "expected_category": "account",
     "expected_urgency": 2,
     "expected_human_review": false
+  },
+  {
+    "id": "T16",
+    "subject": "Webhook signature verification failing after rotating our secret",
+    "text": "We rotated our webhook signing secret last week and now every incoming webhook fails our HMAC signature check, even though we updated the secret on both sides. Is there a grace period where old and new secrets are both valid, or a specific header format change we should be aware of?",
+    "name": "Yusuf Demir",
+    "email": "yusuf.demir@lattice-payments.example",
+    "job_title": "Platform Engineer",
+    "expected_category": "bug",
+    "expected_urgency": 3,
+    "expected_human_review": false,
+    "expected_kb_match": false,
+    "note": "Highly specific integration/webhook detail not covered by any KB article - good test of whether the Specialist admits it doesn't know rather than confidently guessing."
+  },
+  {
+    "id": "T17",
+    "subject": "Currency conversion discrepancy between our two regional accounts",
+    "text": "We run separate workspaces for our EU and US entities. The EU workspace was invoiced in EUR but the converted USD amount on our internal books doesn't match either the invoice date or payment date exchange rate - it's off by about 4%. Can you tell me exactly which rate and timestamp your billing system uses for conversion?",
+    "name": "Camille Dubosc",
+    "email": "camille.dubosc@meridian-holdings.example",
+    "job_title": "Group Financial Controller",
+    "expected_category": "billing",
+    "expected_urgency": 2,
+    "expected_human_review": true,
+    "expected_kb_match": false,
+    "note": "No KB article covers FX conversion methodology - tests whether the agent escalates instead of fabricating a plausible-sounding but wrong exchange-rate policy."
+  },
+  {
+    "id": "T18",
+    "subject": "Mapping custom fields through our Zapier integration",
+    "text": "Trying to set up a Zap that maps three custom fields we created (region, deal_stage, renewal_date) into a new record, but two of the three fields don't show up as options in Zapier's field picker. Is there a limit on which custom field types are exposed to Zapier?",
+    "name": "Bianca Oduya",
+    "email": "bianca.oduya@harvestline-agtech.example",
+    "job_title": "RevOps Specialist",
+    "expected_category": "how_to",
+    "expected_urgency": 2,
+    "expected_human_review": false,
+    "expected_kb_match": false,
+    "note": "Third-party integration detail (Zapier field exposure) not documented in the KB - a plausible real-world gap rather than a truly obscure edge case."
+  },
+  {
+    "id": "T19",
+    "subject": "Need to merge two duplicate accounts into one",
+    "text": "I accidentally signed up twice with slightly different emails years ago and now have two separate accounts with data split between them. Is there a way to merge them into a single account, keeping all the history from both?",
+    "name": "Owen Fitzgerald",
+    "email": "owen.fitzgerald@birchcourt-legal.example",
+    "job_title": "Paralegal",
+    "expected_category": "account",
+    "expected_urgency": 2,
+    "expected_human_review": true,
+    "expected_kb_match": false,
+    "note": "Account merging is an unusual, irreversible operation with no self-service KB article - tests whether the agent correctly refuses to improvise a workaround and escalates instead."
+  },
+  {
+    "id": "T20",
+    "subject": "Which data center is our data physically stored in?",
+    "text": "For an upcoming data residency review, our security team needs to confirm the physical region/data center where our workspace's data is stored at rest, and whether backups ever leave that region.",
+    "name": "Ingrid Sæther",
+    "email": "ingrid.saether@polaris-shipping.example",
+    "job_title": "Information Security Officer",
+    "expected_category": "other",
+    "expected_urgency": 3,
+    "expected_human_review": true,
+    "expected_kb_match": false,
+    "note": "Data residency specifics aren't in the KB (only general DPA article exists) - tests whether the agent distinguishes 'related KB article exists' from 'KB article actually answers this' rather than citing KB015 as if it resolves the question."
   }
 ]
