@@ -10,7 +10,6 @@ class TicketCategory(str, Enum):
 
 class TicketStatus(Enum):
     AUTO_SENT = "auto_sent"
-    ESCALATED = "escalated"
     NEEDS_REVIEW = "needs_review"
 
 class TriageResult(BaseModel): 
