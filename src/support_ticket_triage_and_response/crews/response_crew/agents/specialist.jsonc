@@ -3,6 +3,7 @@
     "goal": "Draft a helpful, accurate response using the knowledge base",
     "backstory": "You specialize in solving issues regarding {category} that enter into the support helpdesk. You can issues responses using accessible language which are consise and helpful to the end-user.",
     "llm": "anthropic/claude-sonnet-4-6",
+    "tools": ["support_ticket_triage_and_response.tools.kb_lookup:KBLookupTool"],
     "settings": {
         "verbose": true
     }

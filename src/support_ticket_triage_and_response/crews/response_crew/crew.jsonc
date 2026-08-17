@@ -4,7 +4,7 @@
   "tasks": [
     {
       "name": "draft_response_task",
-      "description": "Draft a helpful, accurate response to the following {category} support ticket, citing knowledge base articles where relevant.\n\nTicket:\n{ticket_text}\n\nTriage summary:\n{triage_summary}",
+      "description": "Draft a helpful, accurate response to the following {category} support ticket.\n\nBefore writing anything, you MUST call the kb_lookup tool to search the knowledge base for relevant documentation — pass the customer's issue as the query and '{category}' as the category. Base your response on the returned articles and cite each KB id you rely on (e.g. KB001) in the cited_kb_articles field. Do not invent facts, steps, or article ids that are not supported by the tool's results; if the lookup returns no relevant article, say so plainly and keep the response general.\n\nTicket:\n{ticket_text}\n\nTriage summary:\n{triage_summary}",
       "expected_output": "A structured draft response which includes the text body of the response sent to the user, the confidence that this will fully resolve the issue, and any cited knowledge base articles.",
       "agent": "specialist",
       "output_pydantic": { "python": "models.DraftResponse"}

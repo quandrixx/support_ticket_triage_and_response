@@ -20,5 +20,18 @@
     "expected_category": "bug",
     "expected_urgency": 1,
     "expected_human_review": true
-  }
+  },
+  {
+  "id": "T20",
+  "subject": "Which data center is our data physically stored in?",
+  "text": "For an upcoming data residency review, our security team needs to confirm the physical region/data center where our workspace's data is stored at rest, and whether backups ever leave that region.",
+  "name": "Ingrid Sæther",
+  "email": "ingrid.saether@polaris-shipping.example",
+  "job_title": "Information Security Officer",
+  "expected_category": "other",
+  "expected_urgency": 3,
+  "expected_human_review": true,
+  "expected_kb_match": false,
+  "note": "Data residency specifics aren't in the KB (only general DPA article exists) - tests whether the agent distinguishes 'related KB article exists' from 'KB article actually answers this' rather than citing KB015 as if it resolves the question."
+}
 ]

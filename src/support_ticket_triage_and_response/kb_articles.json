@@ -1,0 +1,114 @@
+[
+  {
+    "id": "KB001",
+    "title": "Why was I charged twice for my subscription?",
+    "category": "billing",
+    "tags": ["duplicate charge", "double billing", "refund", "invoice"],
+    "content": "Duplicate charges are most often caused by a retried payment after a temporary processing delay - the first attempt actually succeeded, but the payment gateway timed out before confirming it, so a second attempt was made. Check your Billing > Invoice History page; if you see two identical charges dated within a few minutes of each other, this is almost always the cause. Duplicate charges are refunded automatically within 3-5 business days in most cases. If it has been longer than 5 business days, or the charges are more than an hour apart, escalate to a human agent rather than waiting on the automatic reconciliation."
+  },
+  {
+    "id": "KB002",
+    "title": "Monthly vs. annual billing: what's the difference?",
+    "category": "billing",
+    "tags": ["annual plan", "monthly plan", "pricing", "billing cycle"],
+    "content": "Monthly plans are billed on a rolling 30-day cycle and can be cancelled at any time with no penalty. Annual plans are billed once per year and typically offer a discount compared to paying monthly for 12 consecutive months. Switching from monthly to annual takes effect at the start of your next billing cycle and prorates any remaining monthly balance. Switching from annual to monthly is only available at renewal, not mid-term. For exact current pricing, always confirm against the account's live plan page rather than quoting a fixed discount percentage, since promotional pricing changes periodically."
+  },
+  {
+    "id": "KB003",
+    "title": "Requesting a credit or refund for unused seats",
+    "category": "billing",
+    "tags": ["unused seats", "license", "downsize", "credit", "refund"],
+    "content": "If your team has reduced headcount and no longer needs all licensed seats, unused seats can be removed at your next renewal date with no penalty, which reduces future invoices going forward. Mid-cycle partial refunds for already-paid seats are handled on a case-by-case basis and are not automatic - these requests should be routed to a billing specialist rather than resolved by a self-service article, since they require reviewing the account's specific contract terms."
+  },
+  {
+    "id": "KB004",
+    "title": "Dashboard stuck loading or spinning indefinitely",
+    "category": "bug",
+    "tags": ["dashboard", "loading", "performance", "spinner"],
+    "content": "A dashboard that spins indefinitely after a recent release is most commonly caused by a stale cached bundle conflicting with the new frontend build. First, try a hard refresh (Ctrl+Shift+R or Cmd+Shift+R) or a fully cleared cache in an incognito window. If the issue persists across multiple browsers and a cleared cache, it likely indicates a backend rendering issue tied to that specific release rather than a client-side caching problem, and should be flagged as a possible active incident rather than treated as an isolated one-off report."
+  },
+  {
+    "id": "KB005",
+    "title": "Data export producing corrupted or incomplete files",
+    "category": "bug",
+    "tags": ["export", "corrupted file", "data loss", "csv", "download"],
+    "content": "Corrupted export files are usually caused by one of two things: an export that was interrupted by a network timeout on very large datasets, or a special character (such as certain emoji or non-UTF-8 text) in a field that breaks the file's encoding. Ask the reporting user for the approximate row count and whether any fields contain unusual characters. Repeated corruption on the same account across multiple export attempts, especially on a recurring basis, should be treated as a priority bug report rather than routine troubleshooting, since it indicates a systemic issue rather than a one-time fluke."
+  },
+  {
+    "id": "KB006",
+    "title": "API returning intermittent 500 errors",
+    "category": "bug",
+    "tags": ["api", "500 error", "server error", "integration"],
+    "content": "Intermittent 500 errors on a small percentage of requests (roughly under 5%) are frequently caused by transient load on a specific downstream service rather than the endpoint itself. Ask the reporting developer for: the affected endpoint, approximate error rate, request IDs or timestamps of failed calls, and whether retries succeed. A consistent error rate on one specific endpoint over multiple days, as opposed to a brief spike, should be escalated to engineering with the collected request IDs rather than closed as a transient blip."
+  },
+  {
+    "id": "KB007",
+    "title": "Mobile app crashes when attaching a photo",
+    "category": "bug",
+    "tags": ["mobile app", "crash", "photo upload", "ios", "android"],
+    "content": "Crashes specifically tied to photo attachment on mobile are most often caused by large image file sizes (typically above 10MB from newer phone cameras) exceeding the app's in-memory processing limit before compression kicks in. Ask for the phone model, OS version, and approximate photo file size. If the crash also happens with a small test photo under 1MB, this points to a device- or OS-version-specific bug rather than a file-size issue, and should be escalated with those exact details."
+  },
+  {
+    "id": "KB008",
+    "title": "How to invite teammates to your workspace",
+    "category": "how_to",
+    "tags": ["invite", "team members", "workspace", "collaboration"],
+    "content": "To invite teammates, go to Settings > Workspace > Members, then click 'Invite Member' and enter their email address. Invited members receive an email with a link to join and will appear as 'Pending' until they accept. There is no limit to the number of pending invites, but the number of active members counts against your plan's seat limit. Admins can resend or revoke a pending invite from the same Members page."
+  },
+  {
+    "id": "KB009",
+    "title": "How to export reports to CSV",
+    "category": "how_to",
+    "tags": ["export", "csv", "reports", "download"],
+    "content": "On any report page, click the 'Export' icon in the top-right corner of the report table (it looks like a downward arrow into a tray) and select 'CSV' from the format dropdown. Large reports (over roughly 50,000 rows) are queued and emailed as a download link rather than downloaded instantly - check the Exports tab under your account menu if the download doesn't start immediately. The export button was relocated from the page footer to the top toolbar in a recent redesign, which is a common source of 'I can't find the export button' questions from returning users."
+  },
+  {
+    "id": "KB010",
+    "title": "Setting up Single Sign-On (SSO) with Okta",
+    "category": "how_to",
+    "tags": ["sso", "okta", "saml", "authentication", "it admin"],
+    "content": "SSO via Okta requires an Enterprise plan and is configured under Settings > Security > SSO Configuration. You will need your Okta metadata URL or the individual SSO URL, Issuer, and X.509 certificate from your Okta admin console to complete setup on our side. Once configured, existing users are automatically prompted to link their accounts on next login rather than being logged out immediately. Full step-by-step configuration with screenshots is available in the Enterprise Admin documentation; for first-time setups it's often worth looping in a solutions engineer to configure this jointly with the customer's IT team rather than relying solely on self-service docs."
+  },
+  {
+    "id": "KB011",
+    "title": "Locked out after resetting your password",
+    "category": "account",
+    "tags": ["password reset", "locked out", "login", "invalid credentials"],
+    "content": "Immediately after a password reset, there can be a brief propagation delay (usually under 2 minutes) before the new password is recognized across all login servers - if 'invalid credentials' appears right after resetting, waiting 2-3 minutes and retrying resolves the majority of cases. If the issue persists past 5 minutes, check whether the account has any active SSO configuration, since SSO-enabled accounts cannot use password-based login at all and the reset itself may have been unnecessary. Time-sensitive lockouts (e.g., a user blocked ahead of an imminent meeting) should be prioritized for immediate human follow-up rather than a 'please wait and retry' response."
+  },
+  {
+    "id": "KB012",
+    "title": "Two-factor authentication codes not arriving via SMS",
+    "category": "account",
+    "tags": ["2fa", "two-factor", "sms", "verification code", "mfa"],
+    "content": "SMS-based 2FA codes can fail to arrive due to carrier-side delivery delays, an outdated phone number on file, or the number being on a carrier's spam-filtering list for short codes. As a first step, confirm the phone number on file matches the user's current device. As a workaround, users can switch to an authenticator app (TOTP) under Settings > Security > Two-Factor Authentication, which does not depend on SMS delivery and is the more reliable long-term option. If a user is fully locked out with no working 2FA method, account recovery requires identity verification and should go to a human agent rather than being resolved via self-service."
+  },
+  {
+    "id": "KB013",
+    "title": "Understanding account suspensions",
+    "category": "account",
+    "tags": ["suspended", "account review", "compliance hold"],
+    "content": "Accounts are placed under automatic review for a small set of triggers: unusual login activity from multiple new locations in a short window, a payment method that failed multiple consecutive charges, or a flag from routine compliance screening. Suspension emails are sent to the account's primary billing contact at the time of suspension, but delivery can be delayed or filtered as spam, which explains cases where a user reports 'no warning at all.' Suspensions affecting active business operations (payroll, client deadlines, etc.) should be treated as high priority and routed to a human agent for expedited review rather than left in the standard review queue."
+  },
+  {
+    "id": "KB014",
+    "title": "How feature requests are evaluated",
+    "category": "other",
+    "tags": ["feature request", "roadmap", "product feedback"],
+    "content": "Feature requests are logged in the product feedback system and reviewed quarterly by the product team based on frequency of request, business impact, and alignment with the current roadmap. Common requests like theming and display preferences are tracked in aggregate rather than responded to individually. Users can be told their feedback has been logged; specific timelines or commitments should not be given, since roadmap prioritization is not fixed."
+  },
+  {
+    "id": "KB015",
+    "title": "Requesting changes to your Data Processing Agreement (DPA)",
+    "category": "other",
+    "tags": ["dpa", "legal", "compliance", "contract", "data processing"],
+    "content": "Standard DPA terms are available for self-service review and signature in Settings > Legal > Agreements. Requests to modify or negotiate specific clauses fall outside self-service and must be routed to the legal/contracts team rather than support, since only legal has authority to approve non-standard terms. These requests should always be flagged for human review given the contractual and compliance stakes involved."
+  },
+  {
+    "id": "KB016",
+    "title": "Basic account security best practices",
+    "category": "account",
+    "tags": ["security", "password", "2fa", "best practices"],
+    "content": "Recommended baseline security settings: enable two-factor authentication (preferably an authenticator app rather than SMS), use a unique password not reused from other services, and review the Active Sessions page periodically to confirm no unrecognized devices are logged in. Admins on Enterprise plans can additionally enforce 2FA and SSO account-wide from Settings > Security > Organization Policies."
+  }
+]

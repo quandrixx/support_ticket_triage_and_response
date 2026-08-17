@@ -32,7 +32,7 @@ def _print_summary(rows: list[tuple[dict, TicketState]]) -> None:
     """Print an expected-vs-actual table across all processed tickets."""
     header = (
         f"{'ID':<5} {'category (exp/got)':<26} "
-        f"{'urg (exp/got)':<8} {'human (exp/got)':<18} {'status':<12}"
+        f"{'urg':<8} {'human (exp/got)':<18} {'status':<12}"
     )
     print("\n" + header)
     print("-" * len(header))
